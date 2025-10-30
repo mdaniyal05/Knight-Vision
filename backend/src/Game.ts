@@ -37,11 +37,12 @@ class Game {
     try {
       this.chessBoard.move(move);
     } catch (error) {
+      console.error(error);
       return;
     }
 
     if (this.chessBoard.isGameOver()) {
-      this.player1.emit(
+      this.player1.send(
         JSON.stringify({
           type: GAME_OVER,
           payload: {
@@ -49,7 +50,7 @@ class Game {
           },
         })
       );
-      this.player2.emit(
+      this.player2.send(
         JSON.stringify({
           type: GAME_OVER,
           payload: {
@@ -61,9 +62,9 @@ class Game {
     }
 
     if (this.chessBoard.moves.length % 2 === 0) {
-      this.player2.emit(JSON.stringify({ type: MOVE, payload: move }));
+      this.player2.send(JSON.stringify({ type: MOVE, payload: move }));
     } else {
-      this.player1.emit(JSON.stringify({ type: MOVE, payload: move }));
+      this.player1.send(JSON.stringify({ type: MOVE, payload: move }));
     }
   }
 }
