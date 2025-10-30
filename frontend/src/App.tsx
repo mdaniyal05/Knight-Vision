@@ -1,5 +1,11 @@
+import { Outlet } from "react-router";
+
 const App = () => {
-  return <div>KNIGHT VISION</div>;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 export default App;
