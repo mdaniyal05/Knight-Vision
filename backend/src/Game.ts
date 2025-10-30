@@ -8,6 +8,7 @@ class Game {
   private playerMoves: string[];
   private chessBoard: Chess;
   private startTime: Date;
+  public movesCount = 0;
 
   constructor(player1: WebSocket, player2: WebSocket) {
     this.player1 = player1;
@@ -26,11 +27,11 @@ class Game {
   }
 
   makeMove(socket: WebSocket, move: { from: string; to: string }) {
-    if (this.chessBoard.moves.length % 2 === 0 && socket !== this.player1) {
+    if (this.movesCount % 2 === 0 && socket !== this.player1) {
       return;
     }
 
-    if (this.chessBoard.moves.length % 2 === 1 && socket !== this.player2) {
+    if (this.movesCount % 2 === 1 && socket !== this.player2) {
       return;
     }
 
@@ -61,11 +62,13 @@ class Game {
       return;
     }
 
-    if (this.chessBoard.moves.length % 2 === 0) {
+    if (this.movesCount % 2 === 0) {
       this.player2.send(JSON.stringify({ type: MOVE, payload: move }));
     } else {
       this.player1.send(JSON.stringify({ type: MOVE, payload: move }));
     }
+
+    this.movesCount++;
   }
 }
 
