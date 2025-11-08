@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Landing from "./screens/Landing.tsx";
-import Chess from "./screens/Chess.tsx";
+import Game from "./screens/Game.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/chess",
-        element: <Chess />,
+        element: <Game />,
       },
     ],
   },

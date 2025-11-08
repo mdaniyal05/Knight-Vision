@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
-const WS_URL = "http://localhost:8080";
+const WS_URL = import.meta.env.PROD
+  ? import.meta.env.VITE_APP_URL
+  : "http://localhost:8080";
 
 const useSocket = () => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
